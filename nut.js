@@ -2,24 +2,14 @@ const nuts = document.querySelector("#b");
 const ew = document.querySelector("#h");
 const h = document.getElementById("d");
 let gens = h.querySelectorAll("h1");
-const addr = document.querySelector("#ip");
-let nut = 2;
-let ip = ""
+let nut = new ExpantaNum("2");
 let g = [
     g1 = {
-    cost: 100,
-    amt: 1,
-    cm: 1.5,
+    cost: ExpantaNum(100),
+    amt: ExpantaNum(1),
+    cm: ExpantaNum(1.5),
     },
 ];
-function getip() {
-    fetch('https://api.ipify.org/?format=json')
-.then(ipnut => ipnut.json())
-.then(data => addr.textContent = data.ip)
-return addr.textContent;
-}
-ip = getip();
-console.log(ip);
 function short(x) {
     let a = ["M","B","T","Qa","Qi","Sx","Sp","Oc","No"];
     let b = ["","U","D","T","Qu","Qi","Sx","Sp","Oc","No"];
@@ -100,45 +90,45 @@ function short(x) {
     }
 }
 setInterval(() => {
-    nut += g[0].amt;
-    ew.textContent = short(nut.toString());
+    nut = ExpantaNum.add(nut,g[0].amt);
+    ew.textContent = nut.toPrecision(3);
     g.forEach((gen , i) => {
     if (i > 0)
     {
-        g[i-1].amt += g[i].amt / 10;
-        if (g[i-1].amt >= 10) {
-             nuts.textContent = `Cost: ${short(g[i].cost.toString())}`;
+        g[i-1].amt = ExpantaNum.add(g[i-1].amt,g[i].amt);
+        if (ExpantaNum.gte(g[i-1].amt,10)) {
+             nuts.textContent = `Cost: ${g[i].cost.toPrecision(3)}`;
          }
     }
     else
     {
-        nuts.textContent = `Cost: ${short(g[i].cost.toString())}`;
+        nuts.textContent = `Cost: ${g[i].cost.toPrecision(3)}`;
     }
-        gens[i].textContent = short(gen.amt.toString());
+        gens[i].textContent = gen.amt.toPrecision(3);
     });
 } , 1);
 nuts.addEventListener("click" , () => {
     g.forEach((gen , i) => {
         if (i>0)
         {
-            if (g[i-1].amt >= 10 && nut >= g[i].cost && g[i].amt < 10) {
-                nut -= g[i].cost;
-                g[i].cost *= g[i].cm;
-                g[i].amt++;
+            if (ExpantaNum.gte(g[i-1].amt,10) && ExpantaNum.gte(nut,g[i].cost) && ExpantaNum.lt(g[i].amt,10)) {
+                nut = ExpantaNum.sub(nut,g[i].cost);
+                g[i].cost = ExpantaNum.mul(g[i].cost,g[i].cm);
+                g[i].amt = ExpantaNum.add(g[i].amt,1);
             }
         }
         else
         {
-            if (nut >= g[i].cost && g[i].amt < 10)
+            if (ExpantaNum.gte(nut,g[i].cost) && ExpantaNum.lt(g[i].amt,10))
             {
-                nut -= g[i].cost;
-                g[i].cost *= g[i].cm;
-                g[i].amt++;
+                nut = ExpantaNum.sub(nut,g[i].cost);
+                g[i].cost = ExpantaNum.mul(g[i].cost,g[i].cm);
+                g[i].amt = ExpantaNum.add(g[i].amt,1);
             }
         }
     });
-    if (g[g.length-1].amt >= 10) {
-        let newg = {cost: g[g.length-1].cost * Math.pow(g[g.length-1].cm , 5) , amt: 0 , cm: g[g.length-1].cm + 1};
+    if (ExpantaNum.gte(g[g.length-1].amt,10)) {
+        let newg = {cost:  ExpantaNum.mul(g[g.length-1].cost,ExpantaNum.pow(g[g.length-1].cm,2)) , amt: ExpantaNum(0) , cm: ExpantaNum.add(g[g.length-1].cm,1)};
         g.push(newg);
         h.insertAdjacentHTML("beforeend",`<h1>0</h1>`);
         gens = h.querySelectorAll("h1");
