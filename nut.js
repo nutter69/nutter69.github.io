@@ -2,8 +2,9 @@ const nuts = document.querySelector("#b");
 const ew = document.querySelector("#h");
 const h = document.getElementById("d");
 let gens = h.querySelectorAll("h1");
+const addr = document.querySelector("#ip");
 let nut = 2;
-
+let ip = ""
 let g = [
     g1 = {
     cost: 100,
@@ -11,6 +12,14 @@ let g = [
     cm: 1.5,
     },
 ];
+function getip() {
+    fetch('https://api.ipify.org/?format=json')
+.then(ipnut => ipnut.json())
+.then(data => addr.textContent = data.ip)
+return addr.textContent;
+}
+ip = getip();
+console.log(ip);
 function short(x) {
     let a = ["M","B","T","Qa","Qi","Sx","Sp","Oc","No"];
     let b = ["","U","D","T","Qu","Qi","Sx","Sp","Oc","No"];
