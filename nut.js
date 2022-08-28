@@ -30,7 +30,7 @@ setInterval(() => {
     g.forEach((gen , i) => {
     if (i > 0)
     {
-        g[i-1].amt = ExpantaNum.add(g[i-1].amt,g[i].amt);
+        g[i-1].amt = ExpantaNum.add(g[i-1].amt,ExpantaNum.pow(g[i].amt,s[1]));
         if (ExpantaNum.gte(g[i-1].amt,10)) {
              bn[0].textContent = `Cost: ${g[i].cost.toPrecision(3)}`;
          }
@@ -39,7 +39,7 @@ setInterval(() => {
     {
         bn[0].textContent = `Cost: ${g[i].cost.toPrecision(3)}`;
     }
-    if (gen.amt > 0) {
+    if (ExpantaNum.gt(gen.amt,ExpantaNum(0))) {
         gen.hidden = false;
     } else {
         gen.hidden = true;
@@ -48,7 +48,7 @@ setInterval(() => {
     });
     st.forEach((stat,i)=>{
         stat.textContent = `${s[i].toPrecision(3)} ${sn[i]}`;
-        if (ExpantaNum.gt(s[i],1)) {
+        if (ExpantaNum.gt(s[i],ExpantaNum(1))) {
             stat.hidden = false;
         } else {
             stat.hidden = true;
@@ -57,8 +57,8 @@ setInterval(() => {
     bn.forEach((button,i)=>{
         switch (button.id) {
             case "r":
-                button.textContent = `Rebirth for ${(ExpantaNum.cbrt(ExpantaNum.log10(nut))-2).toPrecision(3)}`;
-                if (ExpantaNum.cbrt(ExpantaNum.log10(nut))-2 >= s[0]) {
+                button.textContent = `Rebirth for ${(ExpantaNum.sub(ExpantaNum.cbrt(ExpantaNum.log10(nut)),1)).toPrecision(3)}`;
+                if (ExpantaNum.gte(ExpantaNum.sub(ExpantaNum.cbrt(ExpantaNum.log10(nut)),1),s[0])) {
                     button.hidden = false;
                 } else {
                     button.hidden = true;
@@ -66,7 +66,7 @@ setInterval(() => {
             break;
             case "p":
                 button.textContent = `Prestige for ${(ExpantaNum.cbrt(ExpantaNum.log10(s[0]))).toPrecision(3)}`;
-                if (ExpantaNum.cbrt(ExpantaNum.log10(s[0])) >= s[1]) {
+                if (ExpantaNum.gte(ExpantaNum.cbrt(ExpantaNum.log10(s[0])),s[1])) {
                     button.hidden = false;
                 } else {
                     button.hidden = true;
