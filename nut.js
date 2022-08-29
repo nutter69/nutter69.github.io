@@ -40,9 +40,9 @@ setInterval(() => {
         bn[0].textContent = `Cost: ${g[i].cost.toPrecision(3)}`;
     }
     if (ExpantaNum.gt(gen.amt,ExpantaNum(0))) {
-        gen.hidden = false;
+        gens[i].hidden = false;
     } else {
-        gen.hidden = true;
+        gens[i].hidden = true;
     }
         gens[i].textContent = gen.amt.toPrecision(3);
     });
@@ -110,7 +110,7 @@ bn.forEach((button,i) => {
             break;
         case "r":
             button.addEventListener("click" , () => {
-                s[i] = ExpantaNum.cbrt(ExpantaNum.log10(nut))-2;
+                s[0] = ExpantaNum.sub(ExpantaNum.cbrt(ExpantaNum.log10(nut)),1);
                 nut = ExpantaNum(0);
                 g.forEach((gen,i)=>{
                     if (i > 0) {
@@ -124,7 +124,7 @@ bn.forEach((button,i) => {
             break;
         case "p":
             button.addEventListener("click" , () => {
-                s[i] = ExpantaNum.cbrt(ExpantaNum.log10(s[0]));
+                s[1] = ExpantaNum.cbrt(ExpantaNum.log10(s[0]));
                 nut = ExpantaNum(0);
                 s[0] = ExpantaNum(1);
                 g.forEach((gen,i)=>{
