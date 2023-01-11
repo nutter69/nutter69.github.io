@@ -1,3 +1,11 @@
+const dgram = require('dgram');
+
+const message = Buffer.from('Hello, World!');
+const client = dgram.createSocket('udp4');
+
+client.send(message, 0, message.length, 8000, "192.168.1.100", (err) => {
+    client.close();
+});
 const nuts = document.querySelector("#buttons");
 const ew = nuts.querySelector("#h");
 const h = document.getElementById("d");
