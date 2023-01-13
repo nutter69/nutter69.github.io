@@ -1,11 +1,18 @@
-const dgram = require('dgram');
+const socket = new WebSocket('ws://3b03-2600-1700-36b0-21b0-99c-ed07-57b-bb49.ngrok.io:6969');
 
-const message = Buffer.from('Hello, World!');
-const client = dgram.createSocket('udp4');
+socket.onopen = () => {
+  console.log('WebSocket connection established.');
+  socket.send('Hello, Server!');
+};
 
-client.send(message, 0, message.length, 8000, "192.168.1.100", (err) => {
-    client.close();
-});
+socket.onmessage = (event) => {
+  console.log(`Received message: ${event.data}`);
+};
+
+socket.onclose = () => {
+  console.log('WebSocket connection closed.');
+};
+
 const nuts = document.querySelector("#buttons");
 const ew = nuts.querySelector("#h");
 const h = document.getElementById("d");
