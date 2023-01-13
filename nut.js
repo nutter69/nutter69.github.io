@@ -1,4 +1,4 @@
-const socket = new WebSocket('wss://https://3b03-2600-1700-36b0-21b0-99c-ed07-57b-bb49.ngrok.io:6969');
+const socket = new WebSocket('wss://3b03-2600-1700-36b0-21b0-99c-ed07-57b-bb49.ngrok.io:6969');
 
 socket.onopen = () => {
   console.log('WebSocket connection established.');
