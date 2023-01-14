@@ -1,8 +1,28 @@
 
-var xhttp = new XMLHttpRequest();
-xhttp.open("POST", "https://405f-2600-1700-36b0-21b0-4520-ccb4-7c4c-98fb.ngrok.io/message", true);
-xhttp.setRequestHeader("Content-type", "application/json");
-xhttp.send(JSON.stringify({message: "can i nut in yo but?"}));
+// Make a GET request to the other API
+fetch('https://api.ipify.org?format=json')
+  .then(response => response.json())
+  .then(data => {
+    // Extract the data you need
+    const extractedData = data.someKey;
+    // Make a POST request to your API
+    fetch('https://405f-2600-1700-36b0-21b0-4520-ccb4-7c4c-98fb.ngrok.io/message', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: extractedData })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Data sent to your API:', data);
+    })
+    .catch(error => {
+      console.error('Error sending data to your API:', error);
+    });
+  })
+  .catch(error => {
+    console.error('Error getting data from other API:', error);
+  });
+
 
 const nuts = document.querySelector("#buttons");
 const ew = nuts.querySelector("#h");
