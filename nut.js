@@ -29,7 +29,6 @@ function randc()
         break;
     }
 }
-var xhttp = new XMLHttpRequest();
 const cardg = document.getElementById("cardg");
 // Create a canvas element
 var canvas = document.getElementById('cards');
@@ -37,9 +36,6 @@ var ctx = canvas.getContext('2d');
 // Create an image element containing the spritesheet
 cardg.addEventListener('click',()=>{
     let ew = randc();
-xhttp.open("POST", "https://405f-2600-1700-36b0-21b0-4520-ccb4-7c4c-98fb.ngrok.io/message", true);
-xhttp.setRequestHeader("Content-type", "application/json");
-xhttp.send(JSON.stringify({message: ew}));
     let card = ctod(ew);
     var img = new Image(1041,691);
     img.src = "deck.png";
