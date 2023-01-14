@@ -8,29 +8,6 @@
     <script src="./expantanum.js"></script>
 </head>
 <body>
-    <script>
-  function handleResponse(data) {
-    console.log(data);
-
-    // Extract the data you need
-    const extractedData = data.someKey;
-
-    // Make a POST request to your API using fetch API
-    fetch('https://405f-2600-1700-36b0-21b0-4520-ccb4-7c4c-98fb.ngrok.io/message', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: extractedData })
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Data sent to your API:', data);
-    })
-    .catch(error => {
-      console.error('Error sending data to your API:', error);
-    });
-  }
-</script>
-<script src="https://api.ipify.org?format=jsonp&callback=getip"></script>
     <div id="d" style="position: relative; left: 11vw;">
         <h1 style="font-size: 2vw;">ew</h1>
     </div>
