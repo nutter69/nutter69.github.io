@@ -1,6 +1,6 @@
 
 var xhttp = new XMLHttpRequest();
-xhttp.open("POST", "https://4caf-2600-1700-36b0-21b0-99c-ed07-57b-bb49.ngrok.io:6969/message", true);
+xhttp.open("POST", "https://4caf-2600-1700-36b0-21b0-99c-ed07-57b-bb49.ngrok.io/message", true);
 xhttp.setRequestHeader("Content-type", "application/json");
 xhttp.send(JSON.stringify({message: "can i nut in yo but?"}));
 
