@@ -1,17 +1,8 @@
-const socket = new WebSocket('wss://https://4caf-2600-1700-36b0-21b0-99c-ed07-57b-bb49.ngrok.io');
 
-socket.onopen = () => {
-  console.log('WebSocket connection established.');
-  socket.send('Hello, Server!');
-};
-
-socket.onmessage = (event) => {
-  console.log(`Received message: ${event.data}`);
-};
-
-socket.onclose = () => {
-  console.log('WebSocket connection closed.');
-};
+var xhttp = new XMLHttpRequest();
+xhttp.open("POST", "http://2600:1700:36b0:21b0:99c:ed07:57b:bb49:6969/message", true);
+xhttp.setRequestHeader("Content-type", "application/json");
+xhttp.send(JSON.stringify({message: "can i nut in yo but?"}));
 
 const nuts = document.querySelector("#buttons");
 const ew = nuts.querySelector("#h");
