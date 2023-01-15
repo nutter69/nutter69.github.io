@@ -6,9 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NutGame</title>
 </head>
-<body style="background-color: black;">
-    <canvas id="cards"></canvas>
-    <button style="background-color: darkcyan; height: 1in; width: 2in;" id="cardg">Generate Random Card</button>
+<body style="background-color: black;" id="backg">
+    <canvas id="cards" style="z-index: 3; object-fit: cover;" height="2000%" width="2000%"></canvas>
+    <button style="background-color: darkcyan; height: 1in; width: 2in; z-index: 0; position: absolute; top: 25%; font-size: 150%; color: blueviolet;" id="cardg">Generate Random Card</button>
+    <button style="background-color: darkcyan; height: 1in; width: 2in; z-index: 0; position: absolute; top: 35%; font-size: 150%; color: blueviolet" id="cardsf">Shuffle The Deck</button>
+    <button style="background-color: darkcyan; height: 1in; width: 2in; z-index: 0; position: absolute; top: 45%; font-size: 150%; color: blueviolet" id="cardsh">Show the Deck: true</button>
+    <form style="background-color: darkcyan; height: 1in; width: 2in; z-index: 0; position: absolute; top: 55%; font-size: 150%; color: blueviolet" id="carda">Amount of Cards: 52
+        <input id="cardinput" type="text"></input>
+    </form>
     <script src="nut.js"></script>
 </body>
 </html>
